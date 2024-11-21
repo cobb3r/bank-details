@@ -10,10 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.company_information, {
+        foreignKey: 'companyId'
+      })
     }
   }
   bank_information.init({
+    companyId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
