@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false
       },
       number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false
       },
       sort: {
