@@ -14,7 +14,7 @@
     </head>
     <body class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-            <a class="navbar-brand ms-2" href="./index.html">Mark Annis Photography</a>
+            <a class="navbar-brand ms-2" href="./index.html">Example Fintech Company</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,26 +38,32 @@
         </nav>
         <main class="row d-flex align-items-center justify-content-center">
             <div class="col-10 col-md-8 col-lg-6 col-xl-4 p-3">
-                <form class="d-flex align-items-center justify-content-center flex-column p-1" id="form1" action="/success">
-                    <label for="holderName">Cardholder Name:</label>
-                    <input type="text" id="holderName" name="holderName"><br>
-                    <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" name="cardNumber"><br>
+                <form id="form" class="d-flex align-items-center justify-content-center flex-column p-1" action="/success">
+                    <label for="accountName">Account Name:</label>
+                    <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name"><br>
+                    <label for="accountNumber">Account Number:</label>
+                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" maxlength="16"><br>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="d-block text-center px-2">
-                            <label for="expires">Expiry:</label>
-                            <input type="text" id="expires" name="expires"><br>
+                            <label for="sortCode">Sort Code:</label>
+                            <input class="text-center" type="text" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00"><br>
                         </div>
                         <div class="d-block text-center px-2">
-                            <label for="cvv">CVV:</labelx>
-                            <input type="text" id="cvv" name="cvv"><br>
+                            <label for="bank">Bank Name</label>
+                            <select name="bank" id="bank">
+                                <option value="HSBC">HSBC</option>
+                                <option value="Lloyds">Lloyds</option>
+                                <option value="Santander">Santander</option>
+                                <option value="Barclays">Barclays</option>
+                            </select>
                         </div>
                     </div>
-                <br>
+                    <br>
                     <button type="submit" name="submit" id="submit">Send</button>
                 </form>
             </div>
         </main>
         <footer class="row"></footer>
+        <script src="form.js"></script>
     </body>
 </html>

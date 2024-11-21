@@ -1,10 +1,16 @@
 const express = require('express') 
 const app = express()
 const port = 5000
+const pool = require('./db')
 
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.static('frontend'))
+
+app.use(express.urlencoded({
+    extended: true,
+    parameterLimit: 4
+}))
 
 app.get('/success', function(req, res) {
     try {
@@ -12,6 +18,10 @@ app.get('/success', function(req, res) {
     }catch(error) {
         res.status(500).end()
     }
+})
+
+app.post('/success', function(req, res) {
+    console.log(req.body)
 })
 
 app.listen(port, function(error) {

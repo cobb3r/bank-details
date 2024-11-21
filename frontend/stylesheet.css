@@ -17,13 +17,14 @@ form {
     border-radius: 0.5em;
 }
 
-form input {
+form input, form select {
     width: 100%;
     height: 4vh;
     padding: 0px 10px 0 10px;
+    border-radius: 0.4em;
 }
 
-form label, button {
+form label {
     font-size: 1.5em;
 }
 
@@ -32,4 +33,5 @@ button {
     width: fit-content;
     height: fit-content;
     background-color: cornflowerblue;
+    font-size: 1.5em;
 }
