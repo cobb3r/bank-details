@@ -14,12 +14,25 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   bank_information.init({
-    name: DataTypes.STRING,
-    number: DataTypes.INTEGER,
-    expiry: DataTypes.STRING,
-    cvv: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    number: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    sort: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    bank: {
+      type:  DataTypes.STRING,
+      allowNull: false,
+    }
   }, {
     sequelize,
+    tableName:'bank_information',
     modelName: 'bank_information',
   });
   return bank_information;

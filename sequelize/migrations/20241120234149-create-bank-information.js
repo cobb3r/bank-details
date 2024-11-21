@@ -15,11 +15,11 @@ module.exports = {
       number: {
         type: Sequelize.INTEGER
       },
-      expiry: {
-        type: Sequelize.STRING
-      },
-      cvv: {
+      sort: {
         type: Sequelize.INTEGER
+      },
+      bank: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
