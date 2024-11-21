@@ -36,11 +36,37 @@
                           <a class="dropdown-item" href="/signin.html">Sign In</a>
                           <a class="dropdown-item" href="/edit.html">Edit Account Information</a>
                         </div>
-                    </li>
+                      </li>
+                  </ul>
             </div>
         </nav>
         <main class="row d-flex align-items-center justify-content-center">
-            <p>Main</p>
+            <div class="col-10 col-md-8 col-lg-6 col-xl-4 p-3">
+                <form id="form" class="d-flex align-items-center justify-content-center flex-column p-1">
+                    <h3>Account Information</h3>
+                    <label for="accountName">Account Name:</label>
+                    <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name" maxlength="22"><br>
+                    <label for="accountNumber">Account Number:</label>
+                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" maxlength="16"><br>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="d-block text-center px-2">
+                            <label for="sortCode">Sort Code:</label>
+                            <input class="text-center" type="text" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00"><br>
+                        </div>
+                        <div class="d-block text-center px-2">
+                            <label for="bank">Bank</label>
+                            <select name="bank" id="bank">
+                                <option value="HSBC">HSBC</option>
+                                <option value="Lloyds">Lloyds</option>
+                                <option value="Santander">Santander</option>
+                                <option value="Barclays">Barclays</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" name="submit" id="submit">Send</button>
+                </form>
+            </div>
         </main>
         <footer class="row"></footer>
     </body>

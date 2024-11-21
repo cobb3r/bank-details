@@ -10,7 +10,7 @@ app.use(express.static('frontend'))
 
 app.use(express.urlencoded({
     extended: true,
-    parameterLimit: 4
+    parameterLimit: 6
 }))
 
 app.get('/success', function(req, res) {
