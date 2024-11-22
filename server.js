@@ -31,14 +31,6 @@ app.get('/success/updated', function(req, res) {
     }
 })
 
-app.get('/success/signin', function(req, res) {
-    try {
-        res.render('success.ejs')
-    }catch(error) {
-        res.status(500).end()
-    }
-})
-
 app.post('/success/signin', async(req, res) => {
     const { eaddress, pass } = req.body
     console.log(pass)
@@ -93,7 +85,7 @@ app.post('/success/signup', async(req, res) => {
             const companyInfo = await company_information.create({'email': eaddress, 'password': hashedPassword })
             const company = await company_information.findOne({ where: {'email': eaddress} })
             const accountInfo = await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': accountNumber, 'sort': sortCode, 'bank': bank})
-            return companyInfo, accountInfo
+            res.json({ message: 'Successfully purchased' })
         } catch(error) {
             console.error(error)
             res.status(500).end()

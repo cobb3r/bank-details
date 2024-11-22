@@ -45,19 +45,23 @@
                 <form id="form" class="d-flex align-items-center justify-content-center flex-column p-1">
                     <h3>Update Information</h3>
                     <label for="eaddress">Email Address</label>
-                    <input class="text-center" type="text" id="eaddress" name="eaddress" placeholder="example@example.com" required><br>
+                    <input class="text-center" type="text" id="eaddress" name="eaddress" placeholder="example@example.com" oninput="validateEmail()" required><br>
                     <label for="pass">Password</label>
-                    <input class="text-center" type="password" id="pass" name="pass" placeholder="Password" required><br>
-                    <hr>
+                    <input class="text-center" type="password" id="pass" name="pass" placeholder="Password" oninput="validate()" required>
+                    <div class="text-center" id="checks">
+                        <p class="my-0" id="length">Password must be More than 8 Digits</p>
+                        <p class="my-0" id="number">Password Must Contain a Number</p>
+                        <p class="my-0" id="upper">Password Must at Least 1 Upper Case Letter</p>
+                    </div><br>
                     <h3>Account Information</h3>
                     <label for="accountName">Account Name:</label>
                     <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name" maxlength="22" required><br>
                     <label for="accountNumber">Account Number:</label>
-                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" maxlength="16" required><br>
+                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" minlength="16" maxlength="16" required><br>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="d-block text-center px-2">
                             <label for="sortCode">Sort Code:</label>
-                            <input class="text-center" type="text" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00" required><br>
+                            <input class="text-center" type="text" minlength="6" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00" required><br>
                         </div>
                         <div class="d-block text-center px-2">
                             <label for="bank">Bank</label>
@@ -75,6 +79,7 @@
             </div>
         </main>
         <footer class="row"></footer>
+        <script src="validation.js"></script>
         <script src="edit.js"></script>
     </body>
 </html>
