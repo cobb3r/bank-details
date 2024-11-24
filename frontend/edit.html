@@ -45,9 +45,11 @@
                 <form id="form" class="d-flex align-items-center justify-content-center flex-column p-1">
                     <h3>Update Information</h3>
                     <label for="eaddress">Email Address</label>
-                    <input class="text-center" type="text" id="eaddress" name="eaddress" placeholder="example@example.com" oninput="validateEmail()" required><br>
+                    <input class="text-center" type="text" id="eaddress" name="eaddress" placeholder="example@example.com" oninput="validateEmail()" required>
+                    <p class="my-0" id="emCheck" style="opacity: 0; color: red;">Invalid Email</p>
                     <label for="pass">Password</label>
                     <input class="text-center" type="password" id="pass" name="pass" placeholder="Password" oninput="validate()" required>
+                    <p class="my-0" id="passCheck" style="opacity: 0; color: red;">Invalid Password</p><br>
                     <div class="text-center" id="checks">
                         <p class="my-0" id="length">Password must be More than 8 Digits</p>
                         <p class="my-0" id="number">Password Must Contain a Number</p>
@@ -57,7 +59,8 @@
                     <label for="accountName">Account Name:</label>
                     <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name" maxlength="22" required><br>
                     <label for="accountNumber">Account Number:</label>
-                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" minlength="16" maxlength="16" required><br>
+                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" minlength="16" maxlength="16" required>
+                    <p class="my-0" id="numCheck" style="opacity: 0; color: red;">Credit Card Number Invalid</p>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="d-block text-center px-2">
                             <label for="sortCode">Sort Code:</label>
@@ -79,6 +82,7 @@
             </div>
         </main>
         <footer class="row"></footer>
+        <script src="return.js"></script>
         <script src="validation.js"></script>
         <script src="edit.js"></script>
     </body>

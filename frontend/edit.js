@@ -4,13 +4,24 @@ form.addEventListener('submit', function(submitted) {
     submitted.preventDefault();
     const fData = new FormData(form);
     const encodedData = new URLSearchParams(fData).toString()
-    fetch('http://localhost:5000/success/updated', {
-        method: "PUT",
-        body: encodedData,
-        headers: {
-            'Content-type': 'application/x-www-form-urlencoded',
-        }
-    })
     form.reset()
-    window.location.replace("/success/updated");
+    if (passValid == true && emailValid == true && numberNumbeic(form.accountNumber.value) && sortNumbeic(form.sortCode.value)) {
+        fetch('http://localhost:5000/updated', {
+            method: "PUT",
+            body: encodedData,
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded',
+            }
+        }).then(function(res) {
+            return res.json()
+        }).then(function(data) {
+            console.log(data.statusCode)
+            resolve(data.message, data.statusCode, data.success)
+        }).catch(function(error) {
+            console.error(error)
+        })
+    } else {
+        emailPassValid()
+        infoValid(form.accountNumber.value, form.sortCode.value) 
+    }
 });

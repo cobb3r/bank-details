@@ -1,3 +1,6 @@
+let passValid = false
+let emailValid = false
+
 function validate() {
     let password = document.getElementById("pass").value
     let containsUpper = false
@@ -34,6 +37,12 @@ function validate() {
     } else {
         document.getElementById("upper").style.color = "red";
     }
+
+    if (containsUpper == true && containsNumber == true && password.length > 8) {
+        passValid = true
+    } else {
+        passValid = false
+    }
 }
 
 function validateEmail() {
@@ -48,7 +57,49 @@ function validateEmail() {
 
     if (containsAt == true) {
         document.getElementById("eaddress").style.color = "green";
+        emailValid = true
     } else {
         document.getElementById("eaddress").style.color = "red";
+        emailValid = false
+    }
+}
+
+function numberNumbeic(ccNum) {
+    if (+ccNum === +ccNum) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function sortNumbeic(sort) {
+    if (+sort === +sort) {
+        return true
+    } else {
+        return false
+    }
+}
+
+function emailPassValid() {
+    if (passValid == false) {
+        document.getElementById('passCheck').style.opacity = '1'
+    } else {
+        document.getElementById('passCheck').style.opacity = '0'
+    }
+    if (emailValid == false) {
+        document.getElementById('emCheck').style.opacity = '1'
+    } else {
+        document.getElementById('emCheck').style.opacity = '0'
+    }
+}
+
+function infoValid(accNumber, sortNumber) {
+    if (accNumber == false) {
+        document.getElementById('numCheck').style.opacity = '1'
+    } else {
+        document.getElementById('numCheck').style.opacity = '0'
+    }
+    if (sortNumber == false) {
+        alert("Sort Code Invalid")
     }
 }
