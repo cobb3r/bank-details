@@ -5,9 +5,9 @@ form.addEventListener('submit', function(submitted) {
     const fData = new FormData(form);
     const encodedData = new URLSearchParams(fData).toString()
     form.reset()
-    if (passValid == true && emailValid == true && numberNumbeic(form.accountNumber.value) && sortNumbeic(form.sortCode.value)) {
-        fetch('http://localhost:5000/updated', {
-            method: "PUT",
+    if (passValid == true && emailValid == true) {
+        fetch('http://localhost:5000/delete', {
+            method: "DELETE",
             body: encodedData,
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded',
@@ -21,6 +21,5 @@ form.addEventListener('submit', function(submitted) {
         })
     } else {
         emailPassValid()
-        infoValid(form.accountNumber.value, form.sortCode.value) 
     }
 });

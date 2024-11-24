@@ -27,5 +27,13 @@ function resolve(message, status, valid) {
             document.getElementById('emCheck').innerHTML = message;
             document.getElementById('emCheck').style.opacity = "1"
             break;
+        case 7:
+            //Delete Account
+            window.location.replace("/success/delete")
+            break;
+        case 8:
+            //Invalid Bank Information
+            document.getElementById('sortCheck').innerHTML = message;
+            document.getElementById('sortCheck').style.opacity = 1
     }
 }

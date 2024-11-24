@@ -1,5 +1,8 @@
 let passValid = false
 let emailValid = false
+let numberCheck = document.getElementById("number")
+let lengthCheck = document.getElementById("length")
+let caseCheck = document.getElementById("upper")
 
 function validate() {
     let password = document.getElementById("pass").value
@@ -7,9 +10,9 @@ function validate() {
     let containsNumber = false
 
     if (password.length > 8) {
-        document.getElementById("length").style.color = "green";
+        lengthCheck.style.color = "green";
     } else {
-        document.getElementById("length").style.color = "red";
+        lengthCheck.style.color = "red";
     }
 
     for (let x = 0; x < password.length; x++) {
@@ -27,15 +30,15 @@ function validate() {
     } 
 
     if (containsNumber == true) {
-        document.getElementById("number").style.color = "green";
+        numberCheck.style.color = "green";
     } else {
-        document.getElementById("number").style.color = "red";
+        numberCheck.style.color = "red";
     }
 
     if (containsUpper == true) {
-        document.getElementById("upper").style.color = "green";
+        caseCheck.style.color = "green";
     } else {
-        document.getElementById("upper").style.color = "red";
+        caseCheck.style.color = "red";
     }
 
     if (containsUpper == true && containsNumber == true && password.length > 8) {
@@ -83,8 +86,14 @@ function sortNumbeic(sort) {
 function emailPassValid() {
     if (passValid == false) {
         document.getElementById('passCheck').style.opacity = '1'
+        numberCheck.style.color = 'red'
+        lengthCheck.style.color = 'red'
+        caseCheck.style.color = 'red'
     } else {
         document.getElementById('passCheck').style.opacity = '0'
+        numberCheck.style.color = 'red'
+        lengthCheck.style.color = 'red'
+        caseCheck.style.color = 'red'
     }
     if (emailValid == false) {
         document.getElementById('emCheck').style.opacity = '1'
@@ -100,6 +109,8 @@ function infoValid(accNumber, sortNumber) {
         document.getElementById('numCheck').style.opacity = '0'
     }
     if (sortNumber == false) {
-        alert("Sort Code Invalid")
+        document.getElementById('sortCheck').style.opacity = '1'
+    } else {
+        document.getElementById('sortCheck').style.opacity = '0'
     }
 }
