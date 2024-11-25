@@ -5,7 +5,7 @@ form.addEventListener('submit', function(submitted) {
     const fData = new FormData(form);
     const encodedData = new URLSearchParams(fData).toString()
     form.reset()
-    if (passValid == true && emailValid == true && numberNumbeic(form.accountNumber.value) && sortNumbeic(form.sortCode.value)) {
+    if (passValid == true && numberNumbeic(form.accountNumber.value) && sortNumbeic(form.sortCode.value)) {
         fetch('http://localhost:5000/signup', {
             method: "POST",
             body: encodedData,
@@ -20,7 +20,7 @@ form.addEventListener('submit', function(submitted) {
             console.error(error)
         })
     } else {
-        emailPassValid()
+        passwordValid()
         infoValid(form.accountNumber.value, form.sortCode.value)
     }
 });

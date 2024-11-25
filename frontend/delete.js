@@ -5,7 +5,7 @@ form.addEventListener('submit', function(submitted) {
     const fData = new FormData(form);
     const encodedData = new URLSearchParams(fData).toString()
     form.reset()
-    if (passValid == true && emailValid == true) {
+    if (passValid == true) {
         fetch('http://localhost:5000/delete', {
             method: "DELETE",
             body: encodedData,
@@ -20,6 +20,6 @@ form.addEventListener('submit', function(submitted) {
             console.error(error)
         })
     } else {
-        emailPassValid()
+        passwordValid()
     }
 });

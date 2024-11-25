@@ -1,5 +1,4 @@
 let passValid = false
-let emailValid = false
 let numberCheck = document.getElementById("number")
 let lengthCheck = document.getElementById("length")
 let caseCheck = document.getElementById("upper")
@@ -48,25 +47,6 @@ function validate() {
     }
 }
 
-function validateEmail() {
-    let email = document.getElementById("eaddress").value
-    let containsAt = false
-
-    for (let y = 0; y < email.length; y++) {
-        if (email[y] == "@") {
-            containsAt = true
-        }
-    }
-
-    if (containsAt == true) {
-        document.getElementById("eaddress").style.color = "green";
-        emailValid = true
-    } else {
-        document.getElementById("eaddress").style.color = "red";
-        emailValid = false
-    }
-}
-
 function numberNumbeic(ccNum) {
     if (+ccNum === +ccNum) {
         return true
@@ -83,7 +63,7 @@ function sortNumbeic(sort) {
     }
 }
 
-function emailPassValid() {
+function passwordValid() {
     if (passValid == false) {
         document.getElementById('passCheck').style.opacity = '1'
         numberCheck.style.color = 'red'
@@ -94,11 +74,6 @@ function emailPassValid() {
         numberCheck.style.color = 'red'
         lengthCheck.style.color = 'red'
         caseCheck.style.color = 'red'
-    }
-    if (emailValid == false) {
-        document.getElementById('emCheck').style.opacity = '1'
-    } else {
-        document.getElementById('emCheck').style.opacity = '0'
     }
 }
 
