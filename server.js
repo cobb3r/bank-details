@@ -4,13 +4,11 @@ const express = require('express')
 const app = express()
 const port = 5000
 const pool = require('./db')
+const mod = require('./modules')
 const bcrypt = require('bcryptjs')
 const { sequelize, bank_information, company_information } = require('./sequelize/models')
 const { where } = require('sequelize')
-const sgMail = require('@sendgrid/mail')
 const UkModulusChecking = require('uk-modulus-checking')
-const sgKey = process.env.sg_api_key
-sgMail.setApiKey(sgKey)
 
 app.set('view engine', 'ejs')
 app.use(express.json())
@@ -63,28 +61,17 @@ app.get('/success/delete', function(req, res) {
 
 app.post('/signin', async(req, res) => {
     const { eaddress, pass } = req.body
-    const scanCompany = await company_information.findOne({
-        where: {
-            'email': eaddress,
-        }
-    })
+    const scanCompany = await company_information.findOne({ where: { 'email': eaddress }})
     if (scanCompany === null) {
         res.json(
             { 
                 message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
-                statusCode: 1,
+                statusCode: 1, 
                 success: false
             });
     } else {
         if (await bcrypt.compare(pass, scanCompany.password)) {
-            let logInEmail = {
-                to: eaddress,
-                from: 'tylerannis131@gmail.com',
-                subject: 'Log In Successful',
-                text: 'Successfully Logged In',
-                html: '<h1>Log In</h1>'
-            }
-            sgMail.send(logInEmail).then(response => console.log("Email Sent")).catch(error => console.log(error.message))
+            mod.send(eaddress, 'Log In Successful', 'Successfully Logged In')
             res.json(
                 { 
                     message: 'Success, Logged In',
@@ -106,7 +93,7 @@ app.put('/updated', async(req, res) => {
     const { accountName, accountNumber, sortCode, bank, eaddress, pass } = req.body
     try {
         const account = await bank_information.findOne({ where: { 'email': eaddress }});
-        const companyAccount = await company_information.findOne({ where: { 'email': eaddress,}});
+        const companyAccount = await company_information.findOne({ where: { 'email': eaddress }});
         if (account === null || companyAccount === null) {
             res.json(
                 { 
@@ -117,19 +104,14 @@ app.put('/updated', async(req, res) => {
         } else {
             if (await bcrypt.compare(pass, companyAccount.password)) {
                 if (new UkModulusChecking({ accountNumber, sortCode }).isValid() === true) {
+                    const hashedNumber = await bcrypt.hashSync(accountNumber, 10);
+                    const hashedSort = await bcrypt.hashSync(sortCode, 10);
                     account.name = accountName
-                    account.number = accountNumber
-                    account.sort = sortCode
+                    account.number = hashedNumber
+                    account.sort = hashedSort
                     account.bank = bank
                     await account.save()
-                    let updatedEmail = {
-                        to: eaddress,
-                        from: 'tylerannis131@gmail.com',
-                        subject: 'Account Information Update',
-                        text: 'Successfully Updated Account Information',
-                        html: '<h1>Updated Account Information</h1>'
-                    }
-                    sgMail.send(updatedEmail).then(response => console.log("Email Sent")).catch(error => console.log(error.message))
+                    mod.send(eaddress, 'Account Information Update', 'Successfully Updated Account Information')
                     res.json(
                         { 
                             message: 'Account Credentials Updated Succesfully',
@@ -166,17 +148,12 @@ app.post('/signup', async(req, res) => {
         try {
             if (new UkModulusChecking({ accountNumber, sortCode }).isValid() === true) {
                 const hashedPassword = await bcrypt.hashSync(pass, 10);
-                const companyInfo = await company_information.create({'email': eaddress, 'password': hashedPassword })
+                const hashedNumber = await bcrypt.hashSync(accountNumber, 10);
+                const hashedSort = await bcrypt.hashSync(sortCode, 10);
+                /*const companyInfo =*/ await company_information.create({'email': eaddress, 'password': hashedPassword })
                 const company = await company_information.findOne({ where: {'email': eaddress} })
-                const accountInfo = await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': accountNumber, 'sort': sortCode, 'bank': bank})
-                let signUpEmail = {
-                    to: eaddress,
-                    from: 'tylerannis131@gmail.com',
-                    subject: 'Sign Up Complete',
-                    text: 'Successfully Signed Up',
-                    html: '<h1>All Signed Up!</h1>'
-                }
-                sgMail.send(signUpEmail).then(response => console.log("Email Sent")).catch(error => console.log(error.message))
+                /*const accountInfo =*/await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': hashedNumber, 'sort': hashedSort, 'bank': bank})
+                mod.send(eaddress, 'Sign Up Complete', 'All Signed Up!')
                 res.json(
                     { 
                         message: 'Successfully Signed Up',
@@ -207,16 +184,8 @@ app.post('/signup', async(req, res) => {
 
 app.delete('/delete', async(req, res) => {
     const { eaddress, pass } = req.body
-    const scanBank = await bank_information.findOne({
-        where: {
-            'email': eaddress,
-        }
-    })
-    const scanCompany = await company_information.findOne({
-        where: {
-            'email': eaddress,
-        }
-    })
+    const scanBank = await bank_information.findOne({ where: { 'email': eaddress,}})
+    const scanCompany = await company_information.findOne({ where: { 'email': eaddress,}})
     if (scanCompany === null && scanBank === null) {
         res.json(
             { 
@@ -228,14 +197,7 @@ app.delete('/delete', async(req, res) => {
         if (await bcrypt.compare(pass, scanCompany.password)) {
             await scanBank.destroy()
             await scanCompany.destroy()
-            let deleteEmail = {
-                to: eaddress,
-                from: 'tylerannis131@gmail.com',
-                subject: 'Account Deleted',
-                text: 'Successfully Deleted Account',
-                html: '<h1>Successfully Deleted Account!</h1>'
-            }
-            sgMail.send(deleteEmail).then(response => console.log("Email Sent")).catch(error => console.log(error.message))
+            mod.send(eaddress, 'Account Deleted', 'Successfully Deleted Account')
             res.json(
                 { 
                     message: 'Successfully Deleted Account',

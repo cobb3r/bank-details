@@ -5,16 +5,49 @@
 html, body {
     max-width: 100%;
     overflow-x: clip;
+    scrollbar-width: none;
+}
+
+nav {
+    background-color: rgb(122, 178, 211);
+}
+
+ul {
+    list-style: none;
+}
+
+nav li {
+    letter-spacing: 0.1em;
+    position: relative;
+}
+
+nav li::after{
+    content: '';
+    height: 0.2em;
+    width: 0;
+    position: absolute;
+    background-color: white;
+    transition: all 0.5s ease;
+}
+
+li:hover::after {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 main {
     background-color: aliceblue;
+    min-height: 100vh;
 }
 
 form {
     height: fit-content;
-    background-color: cadetblue;
-    border-radius: 0.5em;
+    background-color: rgb(122, 178, 211);
+    border-radius: 0.2em;
 }
 
 form input, form select {
@@ -47,4 +80,9 @@ button {
 #pass:focus ~ #checks {
     opacity: 1;
     transform: translateY(0);
+}
+
+footer {
+    height: fit-content;
+    background-color: rgb(122, 178, 211);
 }

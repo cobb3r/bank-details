@@ -14,68 +14,80 @@
     </head>
     <body class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-            <a class="navbar-brand ms-2" href="/index.html">Example Fintech Company</a>
+            <a class="navbar-brand ms-2" href="/index.html">
+                <img src="./images/logo.png" alt="Logo" style="height: 5vh; width: 4vw;">
+                <p style="display: inline;">Example Fintech Company</p> 
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation">
-                <span class="navbar-toggler-icon"></span>
+                  <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navigation">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                  <ul class="navbar-nav mr-auto">
+                     <li class="nav-item active">
                         <a class="nav-link" href="/index.html">Home</a>
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav ms-auto">
+                 <ul class="nav navbar-nav ms-auto me-5">
                     <li class="nav-item">
                         <a class="nav-link" href="/signup.html"><span class="fas fa-sign-in-alt"></span> Sign Up</a>
-                      </li>
-                      <li class="nav-item dropdown">
+                     </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="fas fa-user"></span> Account</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="/signin.html">Sign In</a>
-                            <a class="dropdown-item" href="/edit.html">Edit Account Information</a>
+                            <a class="dropdown-item" href="/edit.html">Edit Account Info</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/delete.html" style="color: red;">Delete Account</a>
                         </div>
-                      </li>
-                  </ul>
+                    </li>
+                </ul>
             </div>
         </nav>
         <main class="row d-flex align-items-center justify-content-center">
-            <div class="col-10 col-md-8 col-lg-6 col-xl-4 p-3">
-                <form id="form" class="d-flex align-items-center justify-content-center flex-column p-1">
-                    <h3>Personal Information</h3>
-                    <label for="eaddress">Email Address</label>
-                    <input class="text-center" type="email" id="eaddress" name="eaddress" placeholder="example@example.com" required>
-                    <p class="my-0" id="emCheck" style="opacity: 0; color: red;">Invalid Email</p>
-                    <label for="pass">Password</label>
-                    <input class="text-center" type="password" id="pass" name="pass" placeholder="Password" oninput="validate()" required>
-                    <p class="my-0" id="passCheck" style="opacity: 0; color: red;">Invalid Password</p><br>
-                    <div class="text-center" id="checks">
-                        <p class="my-0" id="length">Password must be More than 8 Digits</p>
-                        <p class="my-0" id="number">Password Must Contain a Number</p>
-                        <p class="my-0" id="upper">Password Must at Least 1 Upper Case Letter</p>
-                    </div><br>
-                    <h3>Account Information</h3>
-                    <label for="accountName">Account Name:</label>
-                    <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name" maxlength="22" required><br>
-                    <label for="accountNumber">Account Number:</label>
-                    <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" minlength="8" maxlength="8" required>
-                    <p class="my-0" id="numCheck" style="opacity: 0; color: red;">Credit Card Number Invalid</p>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="d-block text-center px-2">
-                            <label for="sortCode">Sort Code:</label>
-                            <input class="text-center" type="text" minlength="6" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00" required>
+            <div class="col-10 col-md-8 col-lg-6 p-3 text-center">
+                <h1>Sign Up</h1>
+                <hr>
+                <form id="form" class="text-center p-1">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center flex-column" style="height: fit-content;">
+                            <h3>Personal Information</h3>
+                            <label for="eaddress">Email Address</label>
+                            <input class="text-center" type="email" id="eaddress" name="eaddress" placeholder="example@example.com" required>
+                            <p class="my-0" id="emCheck" style="opacity: 0; color: red;">Invalid Email</p>
+                            <label for="pass">Password</label>
+                            <input class="text-center" type="password" id="pass" name="pass" placeholder="Password" oninput="validate()" required>
+                            <p class="my-0" id="passCheck" style="opacity: 0; color: red;">Invalid Password</p><br>
+                            <div class="text-center" id="checks">
+                                <p class="my-0" id="length">Password must be More than 8 Digits</p>
+                                <p class="my-0" id="number">Password Must Contain a Number</p>
+                                <p class="my-0" id="upper">Password Must at Least 1 Upper Case Letter</p>
+                            </div>
                         </div>
-                        <div class="d-block text-center px-2">
-                            <label for="bank">Bank</label>
-                            <select name="bank" id="bank">
-                                <option value="HSBC">HSBC</option>
-                                <option value="Lloyds">Lloyds</option>
-                                <option value="Santander">Santander</option>
-                                <option value="Barclays">Barclays</option>
-                            </select>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-center flex-column" style="height: fit-content;">
+                            <h3>Account Information</h3>
+                            <label for="accountName">Account Name:</label>
+                            <input class="text-center" type="text" id="accountName" name="accountName" placeholder="Account Name" maxlength="22" required>
+                            <br>
+                            <label for="accountNumber">Account Number:</label>
+                            <input class="text-center" type="text" id="accountNumber" name="accountNumber" placeholder="Account Number" minlength="8" maxlength="8" required>
+                            <p class="my-0" id="numCheck" style="opacity: 0; color: red;">Credit Card Number Invalid</p>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div class="d-block text-center px-2">
+                                    <label for="sortCode">Sort Code:</label>
+                                    <input class="text-center" type="text" minlength="6" maxlength="6" id="sortCode" name="sortCode" placeholder="00-00-00" required>
+                                </div>
+                                <div class="d-block text-center px-2">
+                                    <label for="bank">Bank</label>
+                                    <select name="bank" id="bank">
+                                        <option value="HSBC">HSBC</option>
+                                        <option value="Lloyds">Lloyds</option>
+                                        <option value="Santander">Santander</option>
+                                        <option value="Barclays">Barclays</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <p class="my-0" id="sortCheck" style="opacity: 0; color: red; position: static; transform: translate(-50%, 0);">Sort Code Invalid</p>
@@ -83,7 +95,45 @@
                 </form>
             </div>
         </main>
-        <footer class="row"></footer>
+        <footer class="row d-flex justify-content-center align-items-center">
+            <div class="col-7 col-md-2" style="overflow: hidden;">
+                <img class="ms-2" src="./Images/logo.png" alt="" style="width: 100%; height:30%; border-radius:1em">
+            </div>
+            <div class="col-12 col-sm-6 col-md-5 text-center">
+                <ul class="p-0">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    </br>
+                    <li>
+                        <a href="/signin.html">Sign In</a>
+                    </li>
+                    </br>
+                    <li>
+                        <a href="/signup.html">Sign Up</a>
+                    </li>
+                    </br>
+                    <li>
+                        <a href="/edit.html">Edit Account</a>
+                    </li>
+                    </br>
+                    <li>
+                        <a href="/delete.html">Delete Account</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 text-center">
+                <h3>Example Fintech Company</h2>
+                </br>
+                <p>64 Farmhill Meadows</p>
+                <p>Douglas</p>
+                <p>Isle of Man</p>
+                <p>IM2 2LW</p>
+                </br>
+                <p><a href="tel:+447624315231">Phone</a></p>
+                <p><a href="mailto:tylerannis55@gmail.com">Email</a></p>
+            </div>
+        </footer>
         <script src="return.js"></script>
         <script src="validation.js"></script>
         <script src="supform.js"></script>

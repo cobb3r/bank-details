@@ -22,11 +22,11 @@ module.exports = {
         allowNull: false
       },
       number: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
         allowNull: false
       },
       sort: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
       },
       bank: {

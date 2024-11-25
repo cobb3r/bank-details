@@ -29,11 +29,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     number: {
-      type: DataTypes.BIGINT,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     sort: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     bank: {

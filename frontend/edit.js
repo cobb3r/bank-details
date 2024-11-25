@@ -4,8 +4,8 @@ form.addEventListener('submit', function(submitted) {
     submitted.preventDefault();
     const fData = new FormData(form);
     const encodedData = new URLSearchParams(fData).toString()
-    form.reset()
     if (passValid == true && numberNumbeic(form.accountNumber.value) && sortNumbeic(form.sortCode.value)) {
+        form.reset()
         fetch('http://localhost:5000/updated', {
             method: "PUT",
             body: encodedData,
@@ -21,6 +21,7 @@ form.addEventListener('submit', function(submitted) {
         })
     } else {
         passwordValid()
-        infoValid(form.accountNumber.value, form.sortCode.value) 
+        infoValid(numberNumbeic(form.accountNumber.value), sortNumbeic(form.sortCode.value))
+        form.reset() 
     }
 });

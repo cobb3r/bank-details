@@ -78,6 +78,7 @@ function passwordValid() {
 }
 
 function infoValid(accNumber, sortNumber) {
+    console.log(accNumber)
     if (accNumber == false) {
         document.getElementById('numCheck').style.opacity = '1'
     } else {
