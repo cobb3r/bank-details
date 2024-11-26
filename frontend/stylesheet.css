@@ -12,6 +12,14 @@ nav {
     background-color: rgb(122, 178, 211);
 }
 
+.dropdown::after {
+    background-color: rgb(122, 178, 211)
+}
+
+.dropdown.show::after {
+    background-color: rgb(122, 178, 211)
+}
+
 ul {
     list-style: none;
 }
@@ -19,6 +27,10 @@ ul {
 nav li {
     letter-spacing: 0.1em;
     position: relative;
+}
+
+nav .dropdown-item:hover {
+    background-color: rgb(91, 145, 176);
 }
 
 nav li::after{
@@ -39,8 +51,28 @@ a {
     color: black;
 }
 
+li:hover {
+    transform: scale(1.1);
+}
+
+li:hover > a {
+    color: rgb(47, 42, 42);
+}
+
 main {
     background-color: aliceblue;
+    min-height: 100vh;
+}
+
+#mainContainer > .col {
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#mainContainer > .col div, #mainContainer > .col footer {
+    scroll-snap-align: start;
     min-height: 100vh;
 }
 

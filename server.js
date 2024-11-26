@@ -61,28 +61,33 @@ app.get('/success/delete', function(req, res) {
 
 app.post('/signin', async(req, res) => {
     const { eaddress, pass } = req.body
-    const scanCompany = await company_information.findOne({ where: { 'email': eaddress }})
-    if (scanCompany === null) {
-        res.status(401).send({
-            message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
-            statusCode: 1, 
-            success: false
-        });
-    } else {
-        if (await bcrypt.compare(pass, scanCompany.password)) {
-            mod.send(eaddress, 'Log In Successful', 'Successfully Logged In')
-            res.status(201).send({
-                message: 'Success, Logged In',
-                statusCode: 2,
-                success: true 
+    try {
+        const scanCompany = await company_information.findOne({ where: { 'email': eaddress }})
+        if (scanCompany === null) {
+            res.status(401).send({
+                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                statusCode: 1, 
+                success: false
             });
         } else {
-            res.status(401).send({
-                message: 'Wrong Password',
-                statusCode: 3,
-                success: false 
-            });
+            if (await bcrypt.compare(pass, scanCompany.password)) {
+                mod.send(eaddress, 'Log In Successful', 'Successfully Logged In')
+                res.status(201).send({
+                    message: 'Success, Logged In',
+                    statusCode: 2,
+                    success: true 
+                });
+            } else {
+                res.status(401).send({
+                    message: 'Wrong Password',
+                    statusCode: 3,
+                    success: false 
+                });
+            }
         }
+    } catch(error) {
+        console.error(error)
+        res.status(500).end()
     }
 })
 
@@ -136,16 +141,16 @@ app.put('/updated', async(req, res) => {
 
 app.post('/signup', async(req, res) => {
     const { accountName, accountNumber, sortCode, bank, eaddress, pass } = req.body
-    const scanCompany = await company_information.findOne({where: { email: eaddress }})
-    if (scanCompany === null) {
-        try {
+    try {
+        const scanCompany = await company_information.findOne({where: { email: eaddress }})
+        if (scanCompany === null) {
             if (new UkModulusChecking({ accountNumber, sortCode }).isValid() === true) {
                 const hashedPassword = await bcrypt.hashSync(pass, 10);
                 const hashedNumber = await bcrypt.hashSync(accountNumber, 10);
                 const hashedSort = await bcrypt.hashSync(sortCode, 10);
-                /*const companyInfo =*/ await company_information.create({'email': eaddress, 'password': hashedPassword })
+                await company_information.create({'email': eaddress, 'password': hashedPassword })
                 const company = await company_information.findOne({ where: {'email': eaddress} })
-                /*const accountInfo =*/await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': hashedNumber, 'sort': hashedSort, 'bank': bank})
+                await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': hashedNumber, 'sort': hashedSort, 'bank': bank})
                 mod.send(eaddress, 'Sign Up Complete', 'All Signed Up!')
                 res.status(201).send({
                     message: 'Successfully Signed Up',
@@ -159,46 +164,51 @@ app.post('/signup', async(req, res) => {
                     success: false 
                 });
             }
-        } catch(error) {
-            console.error(error)
-            res.status(500).end()
+        } else {
+            res.status(401).send({
+                message: 'You Already Have An Account With Us, Please Sign In',
+                statusCode: 6,
+                success: false 
+            });
         }
-    } else {
-        res.status(401).send({
-            message: 'You Already Have An Account With Us, Please Sign In',
-            statusCode: 6,
-            success: false 
-        });
+    } catch(error) {
+        console.error(error)
+        res.status(500).end()
     }
 })
 
 app.delete('/delete', async(req, res) => {
     const { eaddress, pass } = req.body
-    const scanBank = await bank_information.findOne({ where: { 'email': eaddress,}})
-    const scanCompany = await company_information.findOne({ where: { 'email': eaddress,}})
-    if (scanCompany === null && scanBank === null) {
-        res.status(401).send({
-            message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
-            statusCode: 1, 
-            success: false
-        });
-    } else {
-        if (await bcrypt.compare(pass, scanCompany.password)) {
-            await scanBank.destroy()
-            await scanCompany.destroy()
-            mod.send(eaddress, 'Account Deleted', 'Successfully Deleted Account')
-            res.status(200).send({
-                message: 'Successfully Deleted Account',
-                statusCode: 7,
-                success: true 
+    try {
+        const scanBank = await bank_information.findOne({ where: { 'email': eaddress,}})
+        const scanCompany = await company_information.findOne({ where: { 'email': eaddress,}})
+        if (scanCompany === null && scanBank === null) {
+            res.status(401).send({
+                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                statusCode: 1, 
+                success: false
             });
         } else {
-            res.status(401).send({
-                message: 'Wrong Password',
-                statusCode: 3,
-                success: false 
-            });
+            if (await bcrypt.compare(pass, scanCompany.password)) {
+                await scanBank.destroy()
+                await scanCompany.destroy()
+                mod.send(eaddress, 'Account Deleted', 'Successfully Deleted Account')
+                res.status(200).send({
+                    message: 'Successfully Deleted Account',
+                    statusCode: 7,
+                    success: true 
+                });
+            } else {
+                res.status(401).send({
+                    message: 'Wrong Password',
+                    statusCode: 3,
+                    success: false 
+                });
+            }
         }
+    } catch(error) {
+        console.error(error)
+        res.status(500).end()
     }
 })
 
