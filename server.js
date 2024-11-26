@@ -63,28 +63,25 @@ app.post('/signin', async(req, res) => {
     const { eaddress, pass } = req.body
     const scanCompany = await company_information.findOne({ where: { 'email': eaddress }})
     if (scanCompany === null) {
-        res.json(
-            { 
-                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
-                statusCode: 1, 
-                success: false
-            });
+        res.status(401).send({
+            message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+            statusCode: 1, 
+            success: false
+        });
     } else {
         if (await bcrypt.compare(pass, scanCompany.password)) {
             mod.send(eaddress, 'Log In Successful', 'Successfully Logged In')
-            res.json(
-                { 
-                    message: 'Success, Logged In',
-                    statusCode: 2,
-                    success: true 
-                })
+            res.status(201).send({
+                message: 'Success, Logged In',
+                statusCode: 2,
+                success: true 
+            });
         } else {
-            res.json(
-                { 
-                    message: 'Wrong Password',
-                    statusCode: 3,
-                    success: false 
-                })
+            res.status(401).send({
+                message: 'Wrong Password',
+                statusCode: 3,
+                success: false 
+            });
         }
     }
 })
@@ -95,12 +92,11 @@ app.put('/updated', async(req, res) => {
         const account = await bank_information.findOne({ where: { 'email': eaddress }});
         const companyAccount = await company_information.findOne({ where: { 'email': eaddress }});
         if (account === null || companyAccount === null) {
-            res.json(
-                { 
-                    message: 'You Do Not Have An Account With Us Yet, Please Sign Up',
-                    statusCode: 1,
-                    success: false 
-                })
+            res.status(401).send({
+                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                statusCode: 1, 
+                success: false
+            });
         } else {
             if (await bcrypt.compare(pass, companyAccount.password)) {
                 if (new UkModulusChecking({ accountNumber, sortCode }).isValid() === true) {
@@ -112,27 +108,24 @@ app.put('/updated', async(req, res) => {
                     account.bank = bank
                     await account.save()
                     mod.send(eaddress, 'Account Information Update', 'Successfully Updated Account Information')
-                    res.json(
-                        { 
+                        res.status(201).send({
                             message: 'Account Credentials Updated Succesfully',
                             statusCode: 4,
                             success: true 
-                        })
+                        });
                 } else {
-                    res.json(
-                        { 
+                        res.status(401).send({
                             message: 'Invalid Bank Information',
                             statusCode: 8,
                             success: false 
-                        })
+                        });
                 }
             } else {
-                res.json(
-                    { 
-                        message: 'Wrong Password',
-                        statusCode: 3,
-                        success: false 
-                    })
+                res.status(401).send({
+                    message: 'Wrong Password',
+                    statusCode: 3,
+                    success: false 
+                });
             }
         }
     } catch(error) {
@@ -154,31 +147,28 @@ app.post('/signup', async(req, res) => {
                 const company = await company_information.findOne({ where: {'email': eaddress} })
                 /*const accountInfo =*/await bank_information.create({'companyId': company.companyId,'email': eaddress,'name': accountName, 'number': hashedNumber, 'sort': hashedSort, 'bank': bank})
                 mod.send(eaddress, 'Sign Up Complete', 'All Signed Up!')
-                res.json(
-                    { 
-                        message: 'Successfully Signed Up',
-                        statusCode: 5,
-                        success: true
-                    })
+                res.status(201).send({
+                    message: 'Successfully Signed Up',
+                    statusCode: 5,
+                    success: true
+                });
             } else {
-                res.json(
-                    { 
-                        message: 'Invalid Bank Information',
-                        statusCode: 8,
-                        success: false 
-                    })
+                res.status(401).send({
+                    message: 'Invalid Bank Information',
+                    statusCode: 8,
+                    success: false 
+                });
             }
         } catch(error) {
             console.error(error)
             res.status(500).end()
         }
     } else {
-        res.json(
-            { 
-                message: 'You Already Have An Account With Us, Please Sign In',
-                statusCode: 6,
-                success: false 
-            })
+        res.status(401).send({
+            message: 'You Already Have An Account With Us, Please Sign In',
+            statusCode: 6,
+            success: false 
+        });
     }
 })
 
@@ -187,30 +177,27 @@ app.delete('/delete', async(req, res) => {
     const scanBank = await bank_information.findOne({ where: { 'email': eaddress,}})
     const scanCompany = await company_information.findOne({ where: { 'email': eaddress,}})
     if (scanCompany === null && scanBank === null) {
-        res.json(
-            { 
-                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
-                statusCode: 1,
-                success: false
-            });
+        res.status(401).send({
+            message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+            statusCode: 1, 
+            success: false
+        });
     } else {
         if (await bcrypt.compare(pass, scanCompany.password)) {
             await scanBank.destroy()
             await scanCompany.destroy()
             mod.send(eaddress, 'Account Deleted', 'Successfully Deleted Account')
-            res.json(
-                { 
-                    message: 'Successfully Deleted Account',
-                    statusCode: 7,
-                    success: true 
-                })
+            res.status(200).send({
+                message: 'Successfully Deleted Account',
+                statusCode: 7,
+                success: true 
+            });
         } else {
-            res.json(
-                { 
-                    message: 'Wrong Password',
-                    statusCode: 3,
-                    success: false 
-                })
+            res.status(401).send({
+                message: 'Wrong Password',
+                statusCode: 3,
+                success: false 
+            });
         }
     }
 })
