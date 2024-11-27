@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@api/modulr": "file:.api/apis/modulr",
     "@sendgrid/mail": "^8.1.4",
     "bcryptjs": "^2.4.3",
     "ejs": "^3.1.10",

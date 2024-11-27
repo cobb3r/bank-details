@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "modulr",
+      "source": "@modulr/v2.2#3avoj10m3x2fwej",
+      "integrity": "sha512-LiF7go2mQgvUfBZd4cOLOnkQzT+e3M8ZfsoOhuHKuxRLO4BL4rikqi1wZdK75dYkZ/ocVoDuPNaVEWSYYcKL0A==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}

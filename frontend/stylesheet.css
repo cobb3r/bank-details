@@ -10,6 +10,8 @@ html, body {
 
 nav {
     background-color: rgb(122, 178, 211);
+    min-height: 5vh;
+    width: 100%;
 }
 
 .dropdown::after {
@@ -62,6 +64,7 @@ li:hover > a {
 main {
     background-color: aliceblue;
     min-height: 100vh;
+    overflow: scroll;
 }
 
 #mainContainer > .col {
@@ -71,9 +74,11 @@ main {
     scrollbar-width: none;
 }
 
-#mainContainer > .col div, #mainContainer > .col footer {
+#mainContainer > .col > div {
     scroll-snap-align: start;
-    min-height: 100vh;
+    height: 100vh;
+    padding-top: 9vh;
+    scroll-snap-stop: always;
 }
 
 form {
@@ -115,6 +120,7 @@ button {
 }
 
 footer {
-    height: fit-content;
+    scroll-snap-align: start;
+    height: 95%;
     background-color: rgb(122, 178, 211);
 }
