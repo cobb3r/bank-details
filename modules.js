@@ -3,8 +3,8 @@ const sgMail = require('@sendgrid/mail')
 const sgKey = process.env.sg_api_key
 sgMail.setApiKey(sgKey)
 
-//import modulr from '@api/modulr';
-//modulr.auth('process.env.md_api_key');
+//const modulr = require('@api/modulr')
+//modulr.auth(process.env.md_api_key);
 
 function emails(addr, subj, mess) {
     let email = {

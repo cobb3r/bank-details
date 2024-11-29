@@ -2,7 +2,6 @@ function resolve(message, status, valid) {
     switch(status) {
         case 1:
             //No Account
-            //Email Displayed, Password Not
             document.getElementById('emCheck').innerHTML = message;
             document.getElementById('emCheck').style.opacity = "1"
             document.getElementById('passCheck').style.opacity = "0"
