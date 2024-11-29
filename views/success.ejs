@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="/stylesheet.css" />
     </head>
     <body class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light position-absolute" style="z-index: 4;">
             <a class="navbar-brand ms-2" href="/index.html">
                 <img src="/images/logo.png" alt="Logo" style="height: 5vh; width: 4vw;">
                 <p style="display: inline;">Example Fintech Company</p> 
@@ -44,65 +44,65 @@
                     </li>
             </div>
         </nav>
-        <main class="row d-flex align-items-center justify-content-center">
-            <div class="col-10 d-flex align-items-center justify-content-center flex-column">
-                <h1><%= message %></h1>
+        <main id="mainContainer" class="row d-flex justify-content-center">
+            <div id="mainCol" class="col">
                 <div class="row d-flex align-items-center justify-content-center">
-                    <div class="col-12 col-md-8">
-                        <p><%= p1 %></p>
+                    <div class="col-12 col-md-8 d-flex align-items-center justify-content-center flex-column text-center">
+                        <h1><%= message %></h1>
+                        <p style="z-index: 2; font-size: 1.5em;"><%= p1 %></p>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <img src="/images/<%= image %>1.png" style="height: 40vh;">
+                    <div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+                        <img src="/images/<%= image %>1.png" style="height: 30vh;">
                     </div>
                 </div>
                 <div class="row d-flex align-items-center justify-content-center">
-                    <div class="col-12 col-md-8 order-1 order-md-2">
-                        <p><%= p2 %></p>
+                    <div class="col-12 col-md-8 order-1 order-md-2 d-flex align-items-center justify-content-center text-center">
+                        <p style="z-index: 2; font-size: 1.5em;"><%= p2 %></p>
                     </div>
-                    <div class="col-12 col-md-4 md-2 order-2 order-md-1">
-                        <img src="/images/<%= image %>2.png" style="height: 40vh;">
+                    <div class="col-12 col-md-4 md-2 order-2 order-md-1 d-flex align-items-center justify-content-center">
+                        <img src="/images/<%= image %>2.png" style="height: 30vh;">
                     </div>
                 </div>
+                <footer class="row d-flex justify-content-center align-items-center">
+                    <div class="col-7 col-md-2" style="overflow: hidden;">
+                        <img class="ms-2" src="/images/logo.png" alt="" style="width: 100%; height:30%; border-radius:1em">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-5 text-center">
+                        <ul class="p-0">
+                            <li>
+                                <a href="/index.html">Home</a>
+                            </li>
+                            </br>
+                            <li>
+                                <a href="/signin.html">Sign In</a>
+                            </li>
+                            </br>
+                            <li>
+                                <a href="/signup.html">Sign Up</a>
+                            </li>
+                            </br>
+                            <li>
+                                <a href="/edit.html">Edit Account</a>
+                            </li>
+                            </br>
+                            <li>
+                                <a href="/delete.html">Delete Account</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 text-center">
+                        <h3>Example Fintech Company</h2>
+                        </br>
+                        <p>64 Farmhill Meadows</p>
+                        <p>Douglas</p>
+                        <p>Isle of Man</p>
+                        <p>IM2 2LW</p>
+                        </br>
+                        <p><a href="tel:+447624315231">Phone</a></p>
+                        <p><a href="mailto:tylerannis55@gmail.com">Email</a></p>
+                    </div>
+                </footer>
             </div>
         </main>
-        <footer class="row d-flex justify-content-center align-items-center">
-            <div class="col-7 col-md-2" style="overflow: hidden;">
-                <img class="ms-2" src="/images/logo.png" alt="" style="width: 100%; height:30%; border-radius:1em">
-            </div>
-            <div class="col-12 col-sm-6 col-md-5 text-center">
-                <ul class="p-0">
-                    <li>
-                        <a href="/index.html">Home</a>
-                    </li>
-                    </br>
-                    <li>
-                        <a href="/signin.html">Sign In</a>
-                    </li>
-                    </br>
-                    <li>
-                        <a href="/signup.html">Sign Up</a>
-                    </li>
-                    </br>
-                    <li>
-                        <a href="/edit.html">Edit Account</a>
-                    </li>
-                    </br>
-                    <li>
-                        <a href="/delete.html">Delete Account</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 text-center">
-                <h3>Example Fintech Company</h2>
-                </br>
-                <p>64 Farmhill Meadows</p>
-                <p>Douglas</p>
-                <p>Isle of Man</p>
-                <p>IM2 2LW</p>
-                </br>
-                <p><a href="tel:+447624315231">Phone</a></p>
-                <p><a href="mailto:tylerannis55@gmail.com">Email</a></p>
-            </div>
-        </footer>
     </body>
 </html>

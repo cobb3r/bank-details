@@ -77,7 +77,7 @@ app.post('/signin', async(req, res) => {
         const scanCompany = await company_information.findOne({ where: { 'email': eaddress }})
         if (scanCompany === null) {
             res.status(401).send({
-                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                message: 'You Do Not Have An Account Yet, Please Sign Up', 
                 statusCode: 1, 
                 success: false
             });
@@ -110,7 +110,7 @@ app.put('/updated', async(req, res) => {
         const companyAccount = await company_information.findOne({ where: { 'email': eaddress }});
         if (account === null || companyAccount === null) {
             res.status(401).send({
-                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                message: 'You Do Not Have An Account Yet, Please Sign Up', 
                 statusCode: 1, 
                 success: false
             });
@@ -178,7 +178,7 @@ app.post('/signup', async(req, res) => {
             }
         } else {
             res.status(401).send({
-                message: 'You Already Have An Account With Us, Please Sign In',
+                message: 'You Already Have An Account, Please Sign In',
                 statusCode: 6,
                 success: false 
             });
@@ -196,7 +196,7 @@ app.delete('/delete', async(req, res) => {
         const scanCompany = await company_information.findOne({ where: { 'email': eaddress,}})
         if (scanCompany === null && scanBank === null) {
             res.status(401).send({
-                message: 'You Do Not Have An Account With Us Yet, Please Sign Up', 
+                message: 'You Do Not Have An Account Yet, Please Sign Up', 
                 statusCode: 1, 
                 success: false
             });

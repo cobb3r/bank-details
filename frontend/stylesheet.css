@@ -64,17 +64,18 @@ li:hover > a {
 main {
     background-color: aliceblue;
     min-height: 100vh;
+    scrollbar-width: none;
     overflow: scroll;
 }
 
-#mainContainer > .col {
+#mainContainer > #mainCol {
     height: 100vh;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     scrollbar-width: none;
 }
 
-#mainContainer > .col > div {
+#mainContainer > #mainCol > div {
     scroll-snap-align: start;
     height: 100vh;
     padding-top: 9vh;
@@ -104,6 +105,12 @@ button {
     height: fit-content;
     background-color: cornflowerblue;
     font-size: 1.5em;
+    transition: all 0.5s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: rgb(122, 178, 211);
 }
 
 #checks {
