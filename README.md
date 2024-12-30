@@ -1,6 +1,6 @@
 To run the code you will need a postgres connection and a sendgrid API key (mine are stored as environment variables which are inside gitignore)
 
-Then once all of the node modules are installed everything should be good. I have it runnning on http://localhost:5000/ The port can be changed if needed via the port variable on server.js line 5.
+Then once all of the node modules are installed and you run the postgres migrations everything should be good. I have it runnning on http://localhost:5000/ The port can be changed if needed via the port variable on server.js line 5.
 
 Summary:
 
@@ -33,10 +33,10 @@ For all endpoints, there is an email sent in the success option. This uses twili
 
 All other endpoints work largely in the same way, returning different outcomes dependant on bank info, passwords, and wether or not the user already has an account on the database.
 
-Also, automated tests for every single option in every single endpoint are found in the test.js file in the test folder. It uses nodes inbuilt test runner.
-
 For every option, there is a json response send back to the client side file, which when the promise resolves sends the data to return.js (In frontend folder). This includes a status code, which a switch statement uses to produce the outcome of what the server side response was. 
 
 Every outcome that was not successful manipulates the HTML file in order to tell the user what the issue was with the request.
 
 Every outcome that was succesful renders a new specific get endpoint found on server.js, one for each succesful outcome. These get requests render the EJS file found in the Views folder with text (again chatGPT generated for sake of aesthetics), as well as a word to identify which images should be placed on the page
+
+Also, automated tests for every single option in every single endpoint are found in the test.js file in the test folder. It uses nodes inbuilt test runner, which can be accessed by running node --test in the terminal
